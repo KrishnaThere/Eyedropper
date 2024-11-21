@@ -1,0 +1,32 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+.details{
+top:0;
+position:absolute;
+}
+.head{
+  right:0;
+  padding-left: 60vw;
+}
+.head h1{
+  font-size: 6.5em;
+  font-weight:bolder;
+  line-height: 0.7em;
+}
+
+.instruction{
+  padding-right:40px;
+  padding-left: 60vw;
+  
+}
+.instruction p{
+  font-size: 2em;
+  font-weight:light;
+}
+
