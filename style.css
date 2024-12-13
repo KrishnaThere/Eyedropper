@@ -1,32 +1,63 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-canvas {
-  display: block;
-}
-.details{
-top:0;
-position:absolute;
-}
-.head{
-  right:0;
-  padding-left: 60vw;
-}
-.head h1{
-  font-size: 6.5em;
-  font-weight:bolder;
-  line-height: 0.7em;
-}
-
-.instruction{
-  padding-right:40px;
-  padding-left: 60vw;
+nav {
+    height: 90px; /* Adjust for header height */
+    background: #ffffff;
+    margin: 0;
+    padding: 0; 
+    position: fixed;
+    width: 100%; 
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex; /* Use flexbox for positioning */
+    justify-content: space-between; /* Space out items */
+    align-items: center; /* Vertically align items */
+  }
   
-}
-.instruction p{
-  font-size: 2em;
-  font-weight:light;
-}
-
+  nav ul {
+    display: flex;
+    color: #000000;
+    font-size: 70px; /* Adjust font size for better readability */
+    list-style: none; /* Remove default list styling */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    justify-content: space-between; /* Ensures "About" on the left and "The Eye Dropper" on the right */
+  }
+  
+  nav ul a {
+    color: #000000;
+    text-decoration: none;
+    padding: 0 20px; /* Adjust horizontal padding */
+  }
+  
+  
+  .navi.arcade {
+    margin-left: 20px; /* Push "About" to the left edge */
+  }
+  
+  .navi.about {
+    margin-right: 20px; /* Push "The Eye Dropper" to the right edge */
+    text-align: right; /* Align text to the right */
+    padding-right:200px;
+  }
+  
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Ensure the container aligns below the nav */
+  #container {
+    position: relative;
+    top: 90px; /* Match the height of the nav */
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Ensure canvas is displayed and sized properly */
+  canvas {
+    display: block;
+    width: 100%;
+    height: auto; /* Auto scale canvas */
+  }
