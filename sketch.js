@@ -26,77 +26,78 @@ function setup() {
   background(255);
   
 }
+
 function draw() {
-    if (!audioInitialized) {
-      background(255);
-      textAlign(LEFT);
-      textSize(35);
-      fill(0);
-      text("Move your mouse over the grid to inspect colors.\n" +
-      "Click on a grid cell that matches the target color.\n" +
-      "When you successfully click on a matching color:\n" +
-      " - Your score increases by 1.\n" +
-      " - A new target color is displayed.\n" +
-      "Earn 1 point for each correct click.\n" +
-      "Reach the required score (10 points) to level up.\n" +
-      "Each level increases the grid density, making the game more challenging.\n" +
-      "There is a 30-second timer for each level.\n" +
-      "If the timer runs out and your score is below the required points, the level restarts.\n" +
-      "Keep an eye on the timer displayed on the right.",
-      100, 100);
-      textSize(50);
-      text("Click to Start",
-        100,height-150);
-      return;
-    }
-  
-    if (!startTime) {
-      startTime = millis(); // Initialize the timer
-    }
-  
+  if (!audioInitialized) {
     background(255);
-    image(img, 0, 0, height, height, 0, 0, height, height);
-  
-    gridColors = []; // Reset grid colors for each frame
-    for (let i = height / (a * 2); i < height; i += height / a) {
-      for (let j = height / (a * 2); j < height; j += height / a) {
-        const imgGrid = get(i, j); // Get the grid color
-        gridColors.push(imgGrid); // Store it in the gridColors array
-        noStroke();
-        fill(imgGrid[0], imgGrid[1], imgGrid[2]);
-        rect(i - height / (a * 2), j - height / (a * 2), height / a, height / a);
-      }
-    }
-  
-    if (!checked) {
-      targetColor = random(gridColors); // Select a target color
-      checked = true;
-    }
-  
-    eyedropping();
-  
-    // Display target color
-    fill(targetColor);
-    rect(height + (width - height) / 4, 50 + height / 4, (width - height) / 2, (width - height) / 2);
-  
-    // Display the score
+    textAlign(LEFT);
+    textSize(20);
     fill(0);
+    text("Move your mouse over the grid to inspect colors.\n" +
+    "Click on a grid cell that matches the target color.\n" +
+    "When you successfully click on a matching color:\n" +
+    " - Your score increases by 1.\n" +
+    " - A new target color is displayed.\n" +
+    "Earn 1 point for each correct click.\n" +
+    "Reach the required score (10 points) to level up.\n" +
+    "Each level increases the grid density, making the game more challenging.\n" +
+    "There is a 30-second timer for each level.\n" +
+    "If the timer runs out and your score is below the required points, the level restarts.\n" +
+    "Keep an eye on the timer displayed on the right.",
+    100, 100);
     textSize(30);
-    text("Score: " + score, height + (width - height) / 4, 200);
-  
-    // Display the timer
-    let timeRemaining = max(0, timer - Math.floor((millis() - startTime) / 1000));
-    text("Time: " + timeRemaining, height + (width - height) / 4, 230);
-  
-    if (timeRemaining === 0 && score < maxscore) {
-      playTimeUpSound(); // Play sound when time runs out
-      restartlevel();
-    }
-  
-    if (score >= maxscore) {
-      nextlevel();
+    text("Click to Start",
+      100,height-50);
+    return;
+  }
+
+  if (!startTime) {
+    startTime = millis(); // Initialize the timer
+  }
+
+  background(255);
+  image(img, 0, 0, height, height, 0, 0, height, height);
+
+  gridColors = []; // Reset grid colors for each frame
+  for (let i = height / (a * 2); i < height; i += height / a) {
+    for (let j = height / (a * 2); j < height; j += height / a) {
+      const imgGrid = get(i, j); // Get the grid color
+      gridColors.push(imgGrid); // Store it in the gridColors array
+      noStroke();
+      fill(imgGrid[0], imgGrid[1], imgGrid[2]);
+      rect(i - height / (a * 2), j - height / (a * 2), height / a, height / a);
     }
   }
+
+  if (!checked) {
+    targetColor = random(gridColors); // Select a target color
+    checked = true;
+  }
+
+  eyedropping();
+
+  // Display target color
+  fill(targetColor);
+  rect(height + (width - height) / 4, 50 + height / 4, (width - height) / 2, (width - height) / 2);
+  textAlign(LEFT);
+  // Display the score
+  fill(0);
+  textSize(30);
+  text(`Score: ${score}`, height + (width - height) / 4, 200);
+
+  // Display the timer
+  let timeRemaining = max(0, timer - Math.floor((millis() - startTime) / 1000));
+  text(`Time: ${timeRemaining}s`, height + (width - height) / 4, 230);
+
+  if (timeRemaining === 0 && score < maxscore) {
+    playTimeUpSound(); // Play sound when time runs out
+    restartlevel();
+  }
+
+  if (score >= maxscore) {
+    nextlevel();
+  }
+}
 
 function mousePressed() {
   if (!audioInitialized) {
